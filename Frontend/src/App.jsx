@@ -7,7 +7,7 @@ import YourAccount from './pages/YourAccount';
 import CartPage from './pages/CartPage';
 import ContactUs from './pages/ContactUs';
 import OrderPage from './pages/OrderPage';
-import AddressPage from './pages/AddressPage';
+// import AddressPage from './pages/AddressPage';
 import AddPaymentMethods from './components/Payment/Payment';
 import AdminPage from './pages/AdminPage';
 import AddProduct from './components/Admin/AddProduct';
@@ -33,7 +33,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/youraddress" element={<AddressPage />} />
+          {/* <Route path="/youraddress" element={<AddressPage />} /> */}
           <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/products" element={<ProductPage />} />      
