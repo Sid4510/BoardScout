@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const BillboardSchema = new mongoose.Schema({
   location: { type: String, required: true },
+  pincode: { type: Number, required: true },
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
   price: { type: Number, required: true },

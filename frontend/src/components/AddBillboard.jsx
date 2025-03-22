@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const AddBillboard = () => {
     const [location, setLocation] = useState('');
+    const [pincode, setPincode] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [price, setPrice] = useState('');
@@ -21,6 +22,7 @@ const AddBillboard = () => {
     
         const formData = new FormData();
         formData.append('location', location);
+        formData.append('pincode', pincode);
         formData.append('latitude', latitude);
         formData.append('longitude', longitude);
         formData.append('price', price);
@@ -44,6 +46,7 @@ const AddBillboard = () => {
             if (response.ok) {
                 alert('Billboard added successfully!');
                 setLocation('');
+                setPincode('');
                 setLatitude('');
                 setLongitude('');
                 setPrice('');
@@ -86,10 +89,14 @@ const AddBillboard = () => {
             <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 w-3/5 mx-10 flex gap-10">
                 <div className="w-2/3">
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Location</label>
+                        <label className="block text-sm font-medium text-gray-700">Address</label>
                         <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm" />
                     </div>
                     <div className="mb-4 flex gap-4">
+                        <div className="w-1/2">
+                            <label className="block text-sm font-medium text-gray-700">Pincode</label>
+                            <input type="number" step="0.0001" value={pincode} onChange={(e) => setPincode(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm" />
+                        </div>
                         <div className="w-1/2">
                             <label className="block text-sm font-medium text-gray-700">Latitude</label>
                             <input type="number" step="0.0001" value={latitude} onChange={(e) => setLatitude(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm" />

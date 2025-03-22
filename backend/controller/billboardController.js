@@ -6,6 +6,7 @@ const addBillboard = async (req, res) => {
   try {
     const {
       location,
+      pincode,
       latitude,
       longitude,
       price,
@@ -46,6 +47,7 @@ const addBillboard = async (req, res) => {
 
     const newBillboard = new Billboard({
       location,
+      pincode,
       latitude,
       longitude,
       price,
