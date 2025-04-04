@@ -2,22 +2,26 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/auth");
 const billboardRoutes = require("./routes/Billboard"); 
+const powerbiRoutes = require("./routes/powerbi");
 
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", 
+    origin: ["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://127.0.0.1:3000"],
     credentials: true, 
   })
 );
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/billboards", billboardRoutes); 
+app.use("/api/powerbi", powerbiRoutes);
 
 
 const mongoURI = process.env.MONGO_URI;

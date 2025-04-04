@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -15,22 +16,20 @@ const Signup = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-      const data = await response.json();
+      const response = await axios.post("http://localhost:5000/api/auth/signup", 
+        { name, email, password },
+        { withCredentials: true }
+      );
 
-      if (response.ok) {
+      if (response.status === 200) {
         alert("Signup successful! Please log in.");
         navigate("/login"); 
       } else {
-        setError(data.message || "Signup failed");
+        setError(response.data.message || "Signup failed");
       }
     } catch (error) {
       console.error("Error signing up:", error);
-      setError("An error occurred. Please try again later.");
+      setError(error.response?.data?.message || "An error occurred. Please try again later.");
     } finally {
       setLoading(false);
     }
