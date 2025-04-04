@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const router = express.Router();
-const SECRET_KEY = "your_secret_key";
+const SECRET_KEY = process.env.JWT_SECRET || "keyforjwt";
 
 // Signup route
 router.post("/signup", async (req, res) => {
@@ -52,23 +52,36 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: user._id, name: user.name, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign(
+      { id: user._id, name: user.name, role: user.role },
+      SECRET_KEY,
+      { expiresIn: "24h" }
+    );
+
+    // Set cookie for JWT
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      sameSite: "lax",
+    });
 
     res.status(200).json({
       message: "Login successful",
       token,
       name: user.name,
-      role: user.role, 
+      role: user.role,
+      email: user.email,
     });
   } catch (err) {
     console.error("Error logging in:", err);
-    res.status(500).json({ message: "Error logging in" });
+    res.status(500).json({ message: "Error logging in", error: err.message });
   }
 });
 
 // Profile route (get user details)
 router.get("/profile", async (req, res) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
+  const token = req.cookies?.token || req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
     return res.status(401).json({ message: "No token provided" });
@@ -85,8 +98,14 @@ router.get("/profile", async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     console.error("Error fetching profile:", err);
-    res.status(400).json({ message: "Invalid or expired token" });
+    res.status(400).json({ message: "Invalid or expired token", error: err.message });
   }
+});
+
+// Logout route
+router.post("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logout successful" });
 });
 
 module.exports = router;
