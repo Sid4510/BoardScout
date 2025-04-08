@@ -16,7 +16,7 @@ const Login = () => {
   // If user is already logged in, redirect to profile
   useEffect(() => {
     if (user) {
-      navigate("/profile");
+      navigate("/");
     }
   }, [user, navigate]);
 
@@ -43,7 +43,7 @@ const Login = () => {
         
         // Delay navigation slightly to allow state to update
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/");
         }, 100);
       } else {
         setError("Login failed. Please try again.");
