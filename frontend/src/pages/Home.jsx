@@ -303,12 +303,12 @@ const Home = () => {
             >
               Find Billboards
             </Link>
-            <Link
+            {/* <Link
               to="/signup"
               className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-gray-900 transition-colors"
             >
               Create an Account
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
