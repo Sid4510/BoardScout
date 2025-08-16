@@ -135,10 +135,3 @@ The application should now be running on `http://localhost:3000`.
 **Made with ❤️ by Siddhesh Masal**
 
 ```
-
----
-
-I can also create a **shorter, GitHub-friendly version with badges, links, and a cleaner design** so your repo looks more professional.  
-
-Do you want me to do that version too?
-```
