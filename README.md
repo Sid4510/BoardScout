@@ -1,6 +1,3 @@
-Absolutely! I can draft a professional and detailed **README.md** for your BoardScout MERN project. Here’s a complete version you can use and customize further:
-
-````markdown
 # BoardScout
 
 BoardScout is a full-stack web application built using the **MERN (MongoDB, Express.js, React.js, Node.js)** stack. It allows users to **browse, list, and book billboards** efficiently. The platform provides a clean and intuitive interface for discovering billboard availability, managing bookings, and viewing details.
